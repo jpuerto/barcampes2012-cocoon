@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!-- $Id: welcome.html 642116 2008-03-28 08:00:47Z reinhard $ -->
+<html>
+  <head>
+    <title>Welcome</title>
+    <link type="text/css" href="resources/css/ui-darkness/jquery-ui-1.8.23.custom.css" rel="stylesheet" />
+    <link type="text/css" href="resources/css/ui.jqgrid.css" rel="stylesheet" />
+    <script src="resources/js/jquery-1.7.2.min.js" type="text/javascript"> </script>
+    <script src="resources/js/jquery-ui-1.8.23.custom.min.js" type="text/javascript"> </script>
+    <script src="resources/js/i18n/grid.locale-en.js" type="text/javascript"> </script>
+    <script src="resources/js/jquery.jqGrid.min.js" type="text/javascript"> </script>
+<script type="text/javascript"> 
+$(function(){ 
+  $("#drivers").jqGrid({
+    url:'drivers.xml',
+    datatype: 'xml',
+    mtype: 'GET',
+    colNames:['Name','Image', 'Debut','Birthday','Country'],
+    colModel :[ 
+      {name:'id', index:'id', width:100}, 
+      {name:'image', index:'image', width:100, formatter: imageFormatter }, 
+      {name:'debut', index:'debut', width:50, align:'right'}, 
+      {name:'birthday', index:'birthday', width:50, align:'right'}, 
+      {name:'country', index:'country', width:200, align:'right' }, 
+    ],
+    pager: '#drivers-pager',
+    rowNum:10,
+    rowList:[10,20,30],
+    sortname: 'id',
+    sortorder: 'desc',
+    viewrecords: true,
+    gridview: true,
+    caption: 'Formula 1 drivers',
+    shrinkToFit: true
+  }); 
+});
+
+$(function(){ 
+  $("#teams").jqGrid({
+    url:'teams.xml',
+    datatype: 'xml',
+    mtype: 'GET',
+    colNames:['Actions','Name','Image', 'Cups','Points','homepage'],
+    colModel :[ 
+      {name:'id', index:'id', width:100, formatter: actionTeamFormatter },
+      {name:'name', index:'name', width:100 },  
+      {name:'image', index:'image', width:100, formatter: imageFormatter }, 
+      {name:'cups', index:'cups', width:50, align:'right'}, 
+      {name:'points', index:'points', width:50, align:'right'}, 
+      {name:'homepage', index:'homepage', width:200, align:'right', formatter: linkFormatter }, 
+    ],
+    pager: '#teams-pager',
+    rowNum:10,
+    rowList:[10,20,30],
+    sortname: 'id',
+    sortorder: 'desc',
+    viewrecords: true,
+    gridview: true,
+    caption: 'Formula 1 teams',
+    shrinkToFit: true
+  }); 
+});  
+
+$(function() {
+  $( "#tabs" ).tabs();
+});
+
+function imageFormatter(cellValue, options, rowObject) {
+    var imageHtml = "";
+    imageHtml = '<img src="' + cellValue + '" width="50" height="50" alt="" border="0"/>';
+    return imageHtml;
+}
+
+function actionTeamFormatter(cellValue, options, rowObject) {
+    var imageHtml = "";
+    imageHtml = '<a href="/teams/' + cellValue + '.pdf" target="_blank">' + cellValue + '</a>';
+    return imageHtml;
+}
+
+function linkFormatter(cellValue, options, rowObject) {
+    var imageHtml = "";
+    imageHtml = '<a href="http://' + cellValue + '" target="_blank">' + cellValue + '</a>';
+    return imageHtml;
+}
+</script> 
+</head>
+  <body>
+    <div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">Teams</a></li>
+        <li><a href="#tabs-2">Drivers</a></li>
+    </ul>
+    <div id="tabs-1">
+    <table id="teams"><tr><td/></tr></table>
+    <div id="teams-pager"></div>
+    </div>
+    <div id="tabs-2">
+    <table id="drivers"><tr><td/></tr></table>
+    <div id="drivers-pager"></div>
+    </div>
+    </div>
+  </body>
+</html>
