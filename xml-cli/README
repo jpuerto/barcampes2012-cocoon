@@ -1,0 +1,7 @@
+XML pipeline example with nix pipes.
+
+You can start executing "step-1.sh".
+
+The follow steps can be executed in nix pipes
+
+./step-1.sh | ./step-2.sh | .. | ./step-n.sh
