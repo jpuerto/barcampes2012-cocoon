@@ -71,6 +71,14 @@
       </map:match>
     </map:pipeline>
 
+    <map:pipeline>
+      <map:match pattern="*.json">
+        <map:generate src="servlet:connector:/{map:1}.xml" />
+        <map:transform src="xslt/json/xml-to-jsonml.xsl"/>
+        <map:serialize type="json" />
+      </map:match>
+    </map:pipeline>
+
     <!-- Global error handling -->
     <map:handle-errors>
       <map:generate type="exception" />
