@@ -14,18 +14,11 @@
   xmlns:servlet="http://apache.org/cocoon/servlet" xmlns:controller="http://apache.org/cocoon/controller">
 
   <map:pipelines>
-    <map:pipeline>
-      <map:match pattern="team/escuderias.html">
-        <map:generate src="servlet:/connector/escuderias.html" />
-        <map:transform src="resources/xslt/teamIndex.xsl" />
-        <map:serialize type="html" />
-      </map:match>
-    </map:pipeline>
 
     <map:pipeline jmx-group-name="team">
       <map:match pattern="teams.xml">
         <map:generate src="servlet:/connector/escuderias.html" />
-        <map:transform src="resources/xslt/teamIndexInternal.xsl" />
+        <map:transform src="resources/xslt/teamIndex.xsl" />
         <map:transform type="include"/>
         <map:serialize type="xml" />
       </map:match>
@@ -41,7 +34,7 @@
     <map:pipeline jmx-group-name="driver">
       <map:match pattern="drivers.xml">
         <map:generate src="servlet:/connector/escuderias.html" />
-        <map:transform src="resources/xslt/driverIndexInternal.xsl" />
+        <map:transform src="resources/xslt/driverIndex.xsl" />
         <map:transform type="include"/>
         <map:serialize type="xml" />
       </map:match>
