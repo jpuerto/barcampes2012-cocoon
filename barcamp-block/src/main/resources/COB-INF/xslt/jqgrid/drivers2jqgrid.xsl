@@ -30,19 +30,21 @@
         <start><xsl:value-of select="$startRange"/></start>
         <end><xsl:value-of select="$endRange"/></end>
         <xsl:apply-templates select="//d:driver">
-            <xsl:sort select="d:*[local-name() = $sidx]" order="{$sort}" data-type="number"/>
+            <xsl:sort select="d:*[local-name() = $sidx]" order="{$sort}" data-type="text"/>
         </xsl:apply-templates>
     </rows>
   </xsl:template>
 
-  <xsl:template match="d:driver[position() &gt; $startRange and position() &lt;= $endRange]">
-    <row id="{@id}">
-        <cell><xsl:value-of select="d:name"/></cell>
-        <cell><xsl:value-of select="d:image/@xlink:href"/></cell>
-        <cell><xsl:value-of select="d:debut"/></cell>
-        <cell><xsl:value-of select="d:birthday"/></cell>
-        <cell><xsl:value-of select="d:country"/></cell>
-    </row>
+  <xsl:template match="d:driver">
+    <xsl:if test="position() &gt; $startRange and position() &lt;= $endRange">
+      <row id="{@id}">
+          <cell><xsl:value-of select="d:name"/></cell>
+          <cell><xsl:value-of select="d:image/@xlink:href"/></cell>
+          <cell><xsl:value-of select="d:debut"/></cell>
+          <cell><xsl:value-of select="d:birthday"/></cell>
+          <cell><xsl:value-of select="d:country"/></cell>
+      </row>
+    </xsl:if>
   </xsl:template>
 
 </xsl:stylesheet>

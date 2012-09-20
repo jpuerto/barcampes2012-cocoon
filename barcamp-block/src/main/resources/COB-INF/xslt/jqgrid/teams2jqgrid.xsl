@@ -35,15 +35,17 @@
     </rows>
   </xsl:template>
 
-  <xsl:template match="t:team[position() &gt; $startRange and position() &lt;= $endRange]">
-    <row id="{@id}">
-        <cell><xsl:value-of select="@id"/></cell>
-        <cell><xsl:value-of select="t:name"/></cell>
-        <cell><xsl:value-of select="t:image/@xlink:href"/></cell>
-        <cell><xsl:value-of select="t:cups"/></cell>
-        <cell><xsl:value-of select="t:points"/></cell>
-        <cell><xsl:value-of select="t:homepage"/></cell>
-    </row>
+  <xsl:template match="t:team">
+    <xsl:if test="position() &gt; $startRange and position() &lt;= $endRange">
+      <row id="{@id}">
+          <cell><xsl:value-of select="@id"/></cell>
+          <cell><xsl:value-of select="t:name"/></cell>
+          <cell><xsl:value-of select="t:image/@xlink:href"/></cell>
+          <cell><xsl:value-of select="t:cups"/></cell>
+          <cell><xsl:value-of select="t:points"/></cell>
+          <cell><xsl:value-of select="t:homepage"/></cell>
+      </row>
+    </xsl:if>
   </xsl:template>
 
 </xsl:stylesheet>
