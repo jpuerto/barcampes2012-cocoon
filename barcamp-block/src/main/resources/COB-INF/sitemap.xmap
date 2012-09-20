@@ -72,6 +72,14 @@
     </map:pipeline>
 
     <map:pipeline>
+      <map:match pattern="drivers/*.pdf">
+        <map:generate src="servlet:connector:/drivers/{map:1}.xml" />
+        <map:transform src="xslt/fo/driver2fo.xsl"/>
+        <map:serialize type="fo2pdf" />
+      </map:match>
+    </map:pipeline>
+
+    <map:pipeline>
       <map:match pattern="*.json">
         <map:generate src="servlet:connector:/{map:1}.xml" />
         <map:transform src="xslt/json/xml-to-jsonml.xsl"/>

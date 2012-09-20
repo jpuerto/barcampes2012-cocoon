@@ -31,9 +31,10 @@ $(function(){
     url:'drivers.xml',
     datatype: 'xml',
     mtype: 'GET',
-    colNames:['Name','Image', 'Debut','Birthday','Country'],
-    colModel :[ 
-      {name:'id', index:'id', width:100}, 
+    colNames:['Actions','Name','Image', 'Debut','Birthday','Country'],
+    colModel :[
+      {name:'id', index:'id', width:100, formatter: actionDriverFormatter}, 
+      {name:'name', index:'name', width:100}, 
       {name:'image', index:'image', width:100, formatter: imageFormatter }, 
       {name:'debut', index:'debut', width:50, align:'right'}, 
       {name:'birthday', index:'birthday', width:50, align:'right'}, 
@@ -90,6 +91,12 @@ function imageFormatter(cellValue, options, rowObject) {
 function actionTeamFormatter(cellValue, options, rowObject) {
     var imageHtml = "";
     imageHtml = '<a href="/teams/' + cellValue + '.pdf" target="_blank">' + cellValue + '</a>';
+    return imageHtml;
+}
+
+function actionDriverFormatter(cellValue, options, rowObject) {
+    var imageHtml = "";
+    imageHtml = '<a href="/drivers/' + cellValue + '.pdf" target="_blank">' + cellValue + '</a>';
     return imageHtml;
 }
 

@@ -38,6 +38,7 @@
   <xsl:template match="d:driver">
     <xsl:if test="position() &gt; $startRange and position() &lt;= $endRange">
       <row id="{@id}">
+          <cell><xsl:value-of select="@id"/></cell>
           <cell><xsl:value-of select="d:name"/></cell>
           <cell><xsl:value-of select="d:image/@xlink:href"/></cell>
           <cell><xsl:value-of select="d:debut"/></cell>
